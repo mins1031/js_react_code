@@ -1,0 +1,10 @@
+.App{
+    width: 500px;
+    margin: 0 auto; /* 위 width와 margin 설정으로 요소들을 화면변환이 일어나도 가운데로 정렬할 수 있음. */
+
+    display: flex; /* 요소간 간격을 좀더 유연하게 하는 설정. 현대 css에 가장 많이 사용되는 설정 */
+    flex-direction: column; /* flex의 정렬 방향 설정. column으로 하면 세로배치 */
+    gap: 10px; /* 요소간의 간격 설정. gap 속성은 display가 flex인 요소만 적용 가능 */
+}
+
+/**/

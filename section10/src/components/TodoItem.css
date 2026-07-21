@@ -1,0 +1,33 @@
+.TodoItem {
+    display: flex; /*여기서 이설정의 진가가 보임. 이 설정을 끄면 체크박스, 내용,날짜, 버튼 모두 일렬이 아닌 세로로 노출됨.*/
+    align-items: center;
+    gap: 20px; /*요소간 거리*/
+    padding-bottom: 20px; /* 하위 내용간의 거리*/
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.TodoItem input {
+    width: 20px;
+
+}
+
+.TodoItem .content {
+    flex:1;
+}
+
+.TodoItem .date {
+    font-size: 14px;
+    color: gray;
+}
+
+.TodoItem button {
+    cursor: pointer;
+    color: gray;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+

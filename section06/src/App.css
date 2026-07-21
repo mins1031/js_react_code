@@ -1,0 +1,32 @@
+body{
+    padding: 20px;
+}
+/* 크롬 개발자 도구에서 해당 태그에 마우스on 하면 해당 섹션에 각 마진처리를 확인 가능
+ 초록색 : padding 처리 영역
+ 주황핵 : Margin 처리 영역
+*/
+
+.App {
+    margin: 0 auto;
+    /* margin: 10px; */
+    width: 400px;
+}
+
+/* App 클래스 이름을 가진 요소를 기준으로 처리.
+    해당 태그의 
+    너비를 400px로 적용해 여유 값을 잡아주고
+    margin값을 0으로 처리해주면 해당 태그가 가운데 고정되게 됨.
+    왜 그러는지 모르겠는데 일단 외워야 하는 영역인듯
+*/
+
+.App > section {
+    background-color: rgb(245, 245, 245);
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 10px; 
+}
+
+/* border-radius: 5px : 태그의 모서리를 약간 둥글게 처리 */
+/* padding: 20px : 내용물의 여백을 설정.*/
+/* margin-bottom: 10px;  : 컴포넌트간 간격 Viewer와 Controller 사이 10px의 간격이 생김*/

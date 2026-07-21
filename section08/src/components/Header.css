@@ -1,0 +1,5 @@
+.Header > h1{ /*Header 라는 className을 가진 하위 요소의 h1 태그내용의 색상을 설정*/
+    color: rgb(37, 147, 255);
+}
+
+/*그럼 만약 여러 css 파일을 임포트 했을때 className이 각 css 파일에 겹치는게 발생하면.. 에러가 나나?*/

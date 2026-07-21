@@ -1,0 +1,20 @@
+.Editor {
+    display: flex;
+    gap : 10px;
+}
+
+.Editor input {
+    flex : 1; /* 부모요소의 크기를 벗어나지 않는 선에서 최대 크기만큼 요소가 커짐.*/
+    padding: 15px;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+}
+
+.Editor button {   
+    cursor: pointer; /*해당 요소에 마우스를 올려 놓으면 검지만 핀 모양으로 커서가 변경.*/
+    width: 80px;
+    border: none;
+    background-color: rgb(37, 147, 255);
+    color: white; /*내부요소의 색상 -> '추가' 문구가 화이트 처리*/
+    border-radius: 5px; /* 모서리를 뾰족하게 말고 둥글게 처리*/
+}
