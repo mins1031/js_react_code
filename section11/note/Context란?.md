@@ -106,3 +106,21 @@ return
 - TodoItem은 선언후 구조분해할당으로 변수명 알맞게 적용하면 끝임
 
 - 근데 이후 웹 화면을 보면 기존에 최적화 해놨던 부분이 모두 풀려서 리렌더링되는 이슈가 발생함.
+- Context가 리렌더링되는 상황은 배우지 않음
+
+## Context 분리하기
+
+- 왜 최적화가 풀렸을까?
+- Provider도 엄연한 리엑트의 컴포넌트임.
+- Provider에서 Props로 받던 todos가 변경되면 결국 Provider의 Props가 변경되는것이고 그로인해 Provider 컴포넌트의 리렌더링 발생.
+  - todo CUD -> Provider props 변경 -> provider 의 예하가된 하위 컴포넌트 모두 리렌더링
+
+- 그렇지만 memo로 최적화 한 TodoItem 컴포넌트까지 리렌더링 되는건 이해가 되지 않음
+- App에서 todo state 가 변경시 Provider의 props로 제공하는 value내 객체가 재생성됨.
+- 그리고 이객체는 Provider 하위의 TodoItem 컴포넌트가 useContext(TodoContext)로 사용중.
+- 그런데 이 객체 자체가 재생성되었음
+- Context는 내부의 데이터가 하나라도 변경되면 객체가 재생성되고 이건 새로운 객체메모리 주소가 Context에 할당되기 때문에 Context가 리랜더링 되는것이라고 함(정확히는 Context내의 Provider가 리렌더링 되는것.)
+
+- 이런 경우엔 우선 Context를 용도에 따라 나눠서 사용한다고함.
+- 변경될수 있는 값, 변경되지 않는 static한 값 으로 Context를 분리.
+  - TodoStateContext{todos}, TodoDispatchContext{onCreate, onUpdate, onDelete}
