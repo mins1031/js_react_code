@@ -5,12 +5,15 @@ import {
   useRef,
   useReducer,
   useCallback,
-  createContext
+  createContext,
+  useMemo,
+  memo
 } from 'react'
 
 import Header from './components/Header'
 import Editor from './components/Editor'
 import List from './components/List'
+import TodoItem from './components/TodoItem'
 
 const mockData= [
     {
@@ -50,7 +53,8 @@ function reducer(state, action) {
   }
 }
 
-export const TodoContext = createContext();
+export const TodoStateContext = createContext();
+export const TodoDispatchContext = createContext();
 
 
 function App() {
@@ -83,17 +87,20 @@ function App() {
     });
   }, []);
   
+  // 이 객체가 처음 마운트 될떄만 생성, 그 이후론 재생성 안되게 메모처리.
+  const memoizedDispatch = useMemo(() => {
+    return {onCreate, onUpdate, onDelete};
+  }, []);
 
   return (
   <div className = "App">
     <Header />
-
-    <TodoContext.Provider value={
-      {todos, onCreate, onUpdate, onDelete} 
-    }>
-      <Editor/>
-      <List />
-    </TodoContext.Provider>
+    <TodoStateContext.Provider value={todos}>  
+      <TodoDispatchContext.Provider value={memoizedDispatch}>
+        <Editor/>
+        <List />
+      </TodoDispatchContext.Provider>
+    </TodoStateContext.Provider>
   </div>
   );
 }

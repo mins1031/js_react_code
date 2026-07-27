@@ -124,3 +124,5 @@ return
 - 이런 경우엔 우선 Context를 용도에 따라 나눠서 사용한다고함.
 - 변경될수 있는 값, 변경되지 않는 static한 값 으로 Context를 분리.
   - TodoStateContext{todos}, TodoDispatchContext{onCreate, onUpdate, onDelete}
+  - 이렇게 되면 기존 Editor, TodoItem은 Dispatch에서 알맞는 함수들을, List는 State Context에서 todos 를 사용하고 todos가 CUD되면 List컴포넌트만 리렌더링이 일어나는, 즉 변경되는걸 보유한 컴포넌트만 리랜더링되게 처리할 수 있다.
+    - 근데 이건.. 음..
