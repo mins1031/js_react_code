@@ -1,57 +1,46 @@
 import './App.css'
-import { Routes, Route, Link, useNavigate } from 'react-router-dom' // 페이지 랜더링을 위한 컴포넌트 임포트
+import { Routes, Route } from 'react-router-dom' 
+import { useReducer } from 'react' // 일기 관리를 위한 state생성을 위한 reducer.
+
 import Home from './pages/Home'
 import Diary from './pages/Diary'
 import New from './pages/New'
 import NotFound from './pages/NotFound'
-import Button from './components/Button'
-import Header from './components/Header'
+import Edit from './pages/Edit'
 
-import { getEmotionImage } from './util/get-emotion-image'
+// 일기 초기 데이터고 여러개가 필요해 배열로, 일기는 객체 형태로 구성.
+const mockData = [
+  {
+    id : 1,
+    createdDate : new Date().getTime(),
+    emotionId : 1,
+    content : "1번 일기 내용"
+  },
+  {
+    id : 2,
+    createdDate : new Date().getTime(),
+    emotionId : 2,
+    content : "2번 일기 내용"
+  },
+
+];
+
+
+function reducer(state, action) {
+  return state;
+}
 
 function App() {
-  const nav = useNavigate();
+  const [data, dispatch] = useReducer(reducer, mockData); // 일기 데이터
 
-  const onClickButton = () => {
-    nav("/new");
-  };
 
   return (
     <>
-      <Header 
-        title="Header"
-        leftChild={<Button text="Left"/>}
-        rightChild={<Button text="Right"/>}
-      />
-
-      <Button 
-        text={"123"} 
-        // type={"DEFAULT"} 디폴트는 생략가능.
-        onClick={()=>{
-          console.log("DEFAULT 버튼 클릭!")
-        }}
-      />
-
-      <Button 
-        text={"123"} 
-        type={"POSITIVE"}
-        onClick={()=>{
-          console.log("POSITIVE 버튼 클릭!")
-        }}
-      />
-      
-      <Button 
-        text={"123"} 
-        type={"NEGATIVE"}
-        onClick={()=>{
-          console.log("NEGATIVE 버튼 클릭!")
-        }}
-      />  
-
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/new" element={<New />}/>
         <Route path="/diary/:id" element={<Diary />}/>
+        <Route path="/edit/:id" element={<Edit />}/>
         <Route path="*" element={<NotFound />}/>
       </Routes>
     </>
