@@ -1,0 +1,33 @@
+.Header {
+    display: flex;
+    align-items: center;
+
+    padding: 20px, 0px;
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+/* className Header 내에 있는 div 태그를 대상으로 한 css */
+.Header > div {
+    display: flex;
+}
+
+.Header .header_center {
+    width: 50%;
+    font-size: 25px;
+    justify-content: center; 
+    /* justify-content 속성은 display: flex; 로 설정된 요소 안에서(div) 
+        내용이 배치되는 위치를 가운데로 설정하겠다는 설정 */
+}
+
+.Header .header_left {
+    width: 25%;
+    justify-content: flex-start;
+    /* 조건은 동일한데 해당 요소가 화면 왼쪽에 붙는다. */
+}
+
+.Header .header_right {
+    width: 25%;
+    justify-content: flex-end;
+    /* 조건은 동일한데 해당 요소가 화면 오른쪽에 붙는다. */
+}
+

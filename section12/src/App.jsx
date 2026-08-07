@@ -4,6 +4,10 @@ import Home from './pages/Home'
 import Diary from './pages/Diary'
 import New from './pages/New'
 import NotFound from './pages/NotFound'
+import Button from './components/Button'
+import Header from './components/Header'
+
+import { getEmotionImage } from './util/get-emotion-image'
 
 function App() {
   const nav = useNavigate();
@@ -14,14 +18,36 @@ function App() {
 
   return (
     <>
-      <div>
-        <Link to={"/"}>Home</Link>
-        <Link to={"/new"}>New</Link>
-        <Link to={"/diary"}>Diary</Link>
-      </div>
+      <Header 
+        title="Header"
+        leftChild={<Button text="Left"/>}
+        rightChild={<Button text="Right"/>}
+      />
 
-      <button onClick={onClickButton}>
-        New 페이지로 이동</button>
+      <Button 
+        text={"123"} 
+        // type={"DEFAULT"} 디폴트는 생략가능.
+        onClick={()=>{
+          console.log("DEFAULT 버튼 클릭!")
+        }}
+      />
+
+      <Button 
+        text={"123"} 
+        type={"POSITIVE"}
+        onClick={()=>{
+          console.log("POSITIVE 버튼 클릭!")
+        }}
+      />
+      
+      <Button 
+        text={"123"} 
+        type={"NEGATIVE"}
+        onClick={()=>{
+          console.log("NEGATIVE 버튼 클릭!")
+        }}
+      />  
+
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/new" element={<New />}/>
