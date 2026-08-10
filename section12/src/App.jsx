@@ -1,12 +1,13 @@
 import './App.css'
-import { Routes, Route } from 'react-router-dom' 
-import { useReducer } from 'react' // 일기 관리를 위한 state생성을 위한 reducer.
+import { Routes, Route, useNavigate } from 'react-router-dom' 
+import { act, useReducer, useRef } from 'react' // 일기 관리를 위한 state생성을 위한 reducer.
 
 import Home from './pages/Home'
 import Diary from './pages/Diary'
 import New from './pages/New'
-import NotFound from './pages/NotFound'
 import Edit from './pages/Edit'
+import NotFound from './pages/NotFound'
+
 
 // 일기 초기 데이터고 여러개가 필요해 배열로, 일기는 객체 형태로 구성.
 const mockData = [
@@ -22,20 +23,97 @@ const mockData = [
     emotionId : 2,
     content : "2번 일기 내용"
   },
-
 ];
 
 
 function reducer(state, action) {
+  switch(action.type) {
+    case "CREATE": 
+      return [action.data, ...state];
+    
+    case "UPDATE": 
+      for (let idx = 0; idx < state.length; idx++) {
+        if(state[idx].id !== action.data.id) {
+          continue;
+        }
+
+        state[idx].createdDate = action.data.createdDate;
+        state[idx].emotionId = action.data.emotionId;
+        state[idx].content = action.data.content;
+        break;
+      }
+      // state.data
+      return state;
+    
+    case "DELETE": 
+      console.log(state);
+
+      
+      return state.filter((target) => target.id !== action.data.id);
+  }
+
   return state;
 }
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, mockData); // 일기 데이터
+  const [data, dispatch] = useReducer(reducer, mockData); // 일기 데이터. static 한 성격의 데이터기에 useReducer로 state 생성
+  const idRef = useRef(3);
 
+  // 새로운 일기 추가
+  const onCreate = (createdDate, emotionId, content) => {
+    dispatch({
+      type:"CREATE",
+      data : {
+        id : idRef.current++, // useRef는 내부 current 변수로 사용해야하고 이걸 늘려줘야 id로 사용가능 -> js는 이렇게 증감연산의 결과를 사용할수 있나보네?
+        createdDate,
+        emotionId,
+        content
+      }
+    });
+  };
+  
+  
+  // 기존 일기 수정
+  const onUpdate = (updatedId, today, emotionId, content) => {
+    dispatch({
+      type : "UPDATE",
+      data : {
+        id : updatedId,
+        today,
+        emotionId,
+        content
+      }
+    });
+  };
+
+  // 기존 일기 삭제
+  const onDelete = (id) => {
+    dispatch({
+      type : "DELETE",
+      data : {
+        id : id
+      }
+    });
+  };
 
   return (
     <>
+      <button onClick={()=>{
+        onCreate(new Date().getTime(), 1, "hello");
+      }}
+      >일기추가 테스트</button>
+
+      
+      <button onClick={()=>{
+        onUpdate(3, new Date().getTime(), 2, "updated Content");
+      }}
+      >일기변경 테스트</button>
+
+      <button onClick={()=>{
+        onDelete(3);
+      }}
+      >일기삭제 테스트</button>
+
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/new" element={<New />}/>
@@ -81,3 +159,12 @@ export default App
  // <Route path="/diary/:id" element={<Diary />}/>
  // 브라우저의 경로가 /diary고 뒤에 오는 값 /:id은 무조건 동적경로인 url param 을 의미함 
  // 이렇게 설정후 url parma 설정안하고 그냥 /diary 만 적용하면 Notfound 화면 노출 = 라우팅 불가
+
+
+ 
+  // <Header 
+  //   title={"Header"}
+  //   leftChild={<Button text={"Left"}/>}
+  //   rightChild={<Button text={"Right"}/>}
+  // />
+  // <Button text={"123"} onClick={()=>{console.log("123 버튼 클릭")}}/>
