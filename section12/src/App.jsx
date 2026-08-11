@@ -98,7 +98,7 @@ function App() {
 
   return (
     <>
-      <button onClick={()=>{
+      {/* <button onClick={()=>{
         onCreate(new Date().getTime(), 1, "hello");
       }}
       >일기추가 테스트</button>
@@ -112,7 +112,7 @@ function App() {
       <button onClick={()=>{
         onDelete(3);
       }}
-      >일기삭제 테스트</button>
+      >일기삭제 테스트</button> */}
 
       <Routes>
         <Route path="/" element={<Home />}/>
