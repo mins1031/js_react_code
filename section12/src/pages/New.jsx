@@ -22,7 +22,8 @@ const New = () => {
     return (<>
         <Header 
             title="새 일기 쓰기" 
-            leftChild={<Button text={"< 뒤로 가기"}/>}/>
+            leftChild={<Button text={"< 뒤로 가기"}/>}
+        />
 
         <div>
             <h2>오늘의 날짜</h2>

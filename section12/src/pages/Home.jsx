@@ -1,10 +1,28 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 // query param을 처리할 수 있는 리액트 훅
 
-import HeaderBar from './HeaderBar'
+import HeaderBar from '../components/HeaderBar'
 
 import Button from '../components/Button'
 import Header from '../components/Header'
+
+function getYearAndMonthly(operator) {
+    const date = new Date();
+
+    if(operator === '+') {
+        date.setMonth(date.getMonth() + 1 + 1);
+
+        return date.getFullYear() + "년" + " " + date.getMonth() + "월";
+    }
+    
+    if(operator === '-') {
+        date.setMonth(date.getMonth() + 1 - 1);
+
+        return date.getFullYear() + "년" + " " + date.getMonth() + "월";
+    }
+
+    return date.getFullYear() + "년" + " " + (date.getMonth() + 1) + "월";
+}
 
 
 const Home = () => {
@@ -18,11 +36,27 @@ const Home = () => {
        // 새로운 일기 추가 기능
         nav("/new");
     }
-    
-    console.log(params.get("value"));
+
+    const onPlusMonth = () => {
+        const date = new Date();
+        date.setMonth(date.getMonth() + 2);
+
+        return date.getFullYear() + "년" + " " + date.getMonth() + "월";
+    }
+
+    const date = getYearAndMonthly("");
+    console.log(date);
+
 
     return (<>
+        <Header 
+            title="" 
+            leftChild={<Button text={"<"}/>}
+        />
         <HeaderBar onCreate={onCreate}/>
+
+        <button onClick={onCreate}> 새 일기 쓰기 </button>
+
         <div>Home</div>
     
     </>    
