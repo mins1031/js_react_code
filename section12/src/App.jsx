@@ -13,16 +13,29 @@ import NotFound from './pages/NotFound'
 const mockData = [
   {
     id : 1,
-    createdDate : new Date().getTime(),
+    createdDate : new Date("2026-08-14").getTime(),
     emotionId : 1,
     content : "1번 일기 내용"
   },
   {
     id : 2,
-    createdDate : new Date().getTime(),
+    createdDate : new Date("2026-08-10").getTime(),
     emotionId : 2,
     content : "2번 일기 내용"
   },
+  {
+    id : 3,
+    createdDate : new Date("2026-07-10").getTime(),
+    emotionId : 3,
+    content : "3번 일기 내용"
+  },
+  {
+    id : 4,
+    createdDate : new Date("2025-12-10").getTime(),
+    emotionId : 4,
+    content : "4번 일기 내용"
+  },
+  
 ];
 
 
@@ -47,8 +60,8 @@ function reducer(state, action) {
   }
 }
 
-const DiaryStateContext = createContext();
-const DiaryDispatchContext = createContext();
+export const DiaryStateContext = createContext();
+export const DiaryDispatchContext = createContext();
 
 function App() {
   const [data, dispatch] = useReducer(reducer, mockData); // 일기 데이터. static 한 성격의 데이터기에 useReducer로 state 생성
@@ -91,7 +104,7 @@ function App() {
 
   return (
     <>
-      <button onClick={()=>{
+      {/* <button onClick={()=>{
         onCreate(new Date().getTime(), 1, "hello");
       }}
       >일기추가 테스트</button>
@@ -105,7 +118,7 @@ function App() {
       <button onClick={()=>{
         onDelete(3);
       }}
-      >일기삭제 테스트</button>
+      >일기삭제 테스트</button> */}
       
       <DiaryStateContext.Provider value={data}>
         <DiaryDispatchContext.Provider value={

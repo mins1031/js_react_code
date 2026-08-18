@@ -6,7 +6,7 @@ import "./Button.css"
 // 완성본을 보게되면 우선 공통으로 사용할만한 
 // 컴포넌트는 Button, Header정도라 공통으로 만들고 Props에 따라 원하는 css 설정으로 가시되도록 설정
 
-const Button = ({ text, type, onClick }) => {
+const Button = ({ text, type, onClick }) => {    
     return (
     <>
         <button 

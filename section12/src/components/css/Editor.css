@@ -1,0 +1,43 @@
+.Editor > section {
+    margin-bottom: 40px;
+}
+
+.Editor > section > h4 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.Editor > section > input,textarea {
+    background-color: rgb(236, 236, 236);
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px 20px;
+    /* margin: 10px 0px; */
+}
+
+.Editor > section > textarea {
+    padding: 20px;
+    width: 100%;
+    /* 화면내에서 세로길이 기본비중을 얼마나 줄지에 대한 설정 */
+    min-height: 200px;
+    /* 해당 태그의 가로너비의 최소값. 해당값 이하로는 작아지지 않게하는 설정 */
+    resize: vertical;
+    /* 해당 태그를 가로로는 못늘리게 처리 */
+    box-sizing: border-box;
+    /* 해당 칸에 화면 밖으로 나가지 않게처리 */
+}
+
+.Editor .emotion_section .emotion_list_wrapper {
+    display: flex;
+    justify-content: space-around;
+    gap: 2%;
+}
+
+.Editor .button_section {
+    display: flex;
+    justify-content: space-between;
+    /* 내부 요소가 양옆으로 떨어지게 설정 */
+    gap: 2%;
+}
+
